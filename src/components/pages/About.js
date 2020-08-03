@@ -4,7 +4,7 @@ const About = () => {
   return (
     <Fragment>
       <h1>About This App</h1>
-      <p>This app is meant to learn the basics of react</p>
+      <p>This app is meant to learn React JS</p>
     </Fragment>
   );
 };
