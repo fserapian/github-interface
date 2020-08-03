@@ -1,5 +1,6 @@
 import React from 'react';
 import './RepoItem.css';
+import PropTypes from 'prop-types';
 
 const RepoItem = ({ repo }) => {
   return (
@@ -9,6 +10,10 @@ const RepoItem = ({ repo }) => {
       </h5>
     </div>
   );
+};
+
+RepoItem.prototype = {
+  repo: PropTypes.object.isRequired,
 };
 
 export default RepoItem;

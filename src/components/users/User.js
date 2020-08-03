@@ -15,6 +15,7 @@ export class User extends Component {
     getUser: PropTypes.func.isRequired,
     getUserRepos: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
+    repos: PropTypes.array.isRequired,
     loading: PropTypes.bool,
   };
 
