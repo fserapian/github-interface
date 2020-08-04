@@ -1,57 +1,52 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
-class Search extends Component {
-  state = {
-    text: '',
-  };
+const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
+  const [text, setText] = useState('');
 
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired,
-  };
+  const onChange = (e) => setText(e.target.value);
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
-
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.text === '') {
-      this.props.setAlert('Please enter text', 'danger');
+    if (text === '') {
+      setAlert('Please enter text', 'danger');
     } else {
-      this.props.searchUsers(this.state.text);
-      this.setState({ text: '' });
+      searchUsers(text);
+      setText('');
     }
   };
 
-  render() {
-    const { showClear, clearUsers } = this.props;
-    return (
-      <Fragment>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            name="text"
-            placeholder="Search users..."
-            className="form-control mb-3"
-            value={this.state.text}
-            onChange={this.onChange}
-          />
-          <button type="submit" className="btn btn-block btn-primary mb-3">
-            Search
-          </button>
-        </form>
-        {showClear && (
-          <button
-            className="btn btn-outline-warning btn-block mb-3"
-            onClick={clearUsers}>
-            Clear
-          </button>
-        )}
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="text"
+          placeholder="Search users..."
+          className="form-control mb-3"
+          value={text}
+          onChange={onChange}
+        />
+        <button type="submit" className="btn btn-block btn-primary mb-3">
+          Search
+        </button>
+      </form>
+      {showClear && (
+        <button
+          className="btn btn-outline-warning btn-block mb-3"
+          onClick={clearUsers}>
+          Clear
+        </button>
+      )}
+    </Fragment>
+  );
+};
+
+Search.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+  setAlert: PropTypes.func.isRequired,
+};
 
 export default Search;
