@@ -1,0 +1,20 @@
+import * as actions from '../types';
+
+export default (state, action) => {
+  switch (action.type) {
+    case actions.SEARCH_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+      };
+
+    case actions.SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    default:
+      return state;
+  }
+};
